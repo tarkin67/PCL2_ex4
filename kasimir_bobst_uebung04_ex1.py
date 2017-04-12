@@ -14,6 +14,9 @@ def getfreqwords(indir, outfile):
     for filename in glob.iglob(indir +
                                "/SAC-Jahrbuch_[0-9][0-9][0-9][0-9]_mul.xml"):
         print(filename)
+        for node in ET.iterparse(filename):
+            # print the text of all the nodes
+            print(node[1].text)
 
 
 def main():
