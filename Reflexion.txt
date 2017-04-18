@@ -1,0 +1,12 @@
+PCL II, Übung 4, FS17
+Reflexion/Feedback
+Autor: Kasimir Bobst
+Matrikel-Nr.: 14 723 423
+
+
+
+Reflexion/Feedback
+
+a) In dieser Übung konnte ich viele Erfahrungen für das Verarbeiten von grossen Datenmengen sammeln. Ich fand es interessant, auf die Effizienz der Skripts schauen zu müssen. Mit Git war ich aber schon vertraut.
+
+b) In diese Übung habe ich ca 7 Stunden investiert.
