@@ -12,6 +12,10 @@ import os
 
 
 def getfreqwords(indir, outfile):
+    """Gets the 20 most frequent sentences with at least 6 tokens
+    from all .xml files in indir
+    """
+
     output_file = open(outfile, 'w', encoding="utf8")
     tmp_file_name = "tmp.txt"
     temp_file = open(tmp_file_name, "w+", encoding="utf8")
@@ -20,7 +24,7 @@ def getfreqwords(indir, outfile):
                                "/SAC-Jahrbuch_[0-9][0-9][0-9][0-9]_mul.xml"):
         print(filename)
         for node in ET.iterparse(filename, tag="s"):
-            # print all sentences that have at least 6 tokens
+            # only take into account the sentences with at least 6 tokens
             if(len(node[1]) >= 6):
                 sentence = ""
                 for element in node[1]:
@@ -30,9 +34,12 @@ def getfreqwords(indir, outfile):
 
                 sentence_hash = hash(sentence)
 
+                # write the sentence with it's corresponding hash to the temp
+                # file
                 save_hash_sentence_pair_in_file(
                     sentence_hash, sentence, temp_file)
 
+                # update the counter of the sentence
                 if(sentence_hash in all_sentences):
                     all_sentences[sentence_hash] += 1
                 else:
@@ -41,10 +48,15 @@ def getfreqwords(indir, outfile):
             node[1].clear()
 
     temp_file.close()
-    print("Getting {} most common sentences...".format(str(20)))
+    print("Getting {} most common sentences " +
+          "from temporary file...".format(str(20)))
+
+    # iterate over the hashes of the 20 most common sentences
     for val in sorted(all_sentences.items(),
                       key=lambda x: x[1], reverse=True)[:20]:
 
+        # find the sentence in the temporary file and write it to the output
+        # file together with the number of occurrences
         output_file.write("{}, {}\n".format(
             read_sentence_from_file_with_hash(val[0], tmp_file_name),
             str(val[1])))
