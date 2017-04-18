@@ -36,12 +36,13 @@ def getfreqwords(indir, outfile):
                 else:
                     all_sentences[sentence_hash] = 1
 
+            node[1].clear()
+
         counter = 0
-        for val in sorted(all_sentences.items(), key=lambda x: x[1], reverse=True)[:20]:
+        for val in sorted(all_sentences.items(),
+                          key=lambda x: x[1], reverse=True)[:20]:
             print(sentence_hashes[val[0]] + ", " + str(val[1]))
             counter += 1
-
-            node[1].clear()
 
     output_file.close()
 
