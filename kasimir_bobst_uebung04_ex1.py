@@ -34,22 +34,21 @@ def getfreqwords(indir, outfile):
 
                 sentence_hash = hash(sentence)
 
-                # write the sentence with it's corresponding hash to the temp
-                # file
-                save_hash_sentence_pair_in_file(
-                    sentence_hash, sentence, temp_file)
-
                 # update the counter of the sentence
                 if(sentence_hash in all_sentences):
                     all_sentences[sentence_hash] += 1
                 else:
+                    # write the sentence with it's corresponding hash to the
+                    # temp file
+                    save_hash_sentence_pair_in_file(
+                        sentence_hash, sentence, temp_file)
                     all_sentences[sentence_hash] = 1
 
             node[1].clear()
 
     temp_file.close()
-    print("Getting {} most common sentences " +
-          "from temporary file...".format(str(20)))
+    print(("Getting {} most common sentences " +
+           "from temporary file...").format(str(20)))
 
     # iterate over the hashes of the 20 most common sentences
     for val in sorted(all_sentences.items(),
