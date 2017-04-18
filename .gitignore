@@ -1,3 +1,5 @@
 *.pdf
 out.txt
 tmp.txt
+trainfile.txt
+testfile.txt
